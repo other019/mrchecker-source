@@ -351,7 +351,7 @@ public class DriverManager {
 			String webDriversPath = DriverManager.propertiesSelenium.getWebDrivers();
 			try {
 				System.setProperty("wdm.targetPath", webDriversPath);
-				System.setProperty("wdm.avoidAutoVersion", True);
+				System.setProperty("wdm.avoidAutoVersion", "True");
 				WebDriverManager.getInstance(webDriverType)
 						.proxy(proxy)
 						.setup();
