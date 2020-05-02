@@ -1,5 +1,4 @@
-jobDsl(
-"""
+jobDsl scriptText: """
 def repo_url = 'https://github.com/other019/mrchecker-source.git'
 multibranchPipelineJob('build'){
 	description("Build source code and provide packages")
@@ -20,4 +19,3 @@ multibranchPipelineJob('build'){
 	}
 }
 """
-)
