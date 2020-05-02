@@ -11,7 +11,7 @@ node{
 			}
 			//github is a valid option too
 		}
-		orphanedItemStratedy{
+		orphanedItemStrategy{
 			discardOldItems{
 				daysToKeep(30)
 			}
