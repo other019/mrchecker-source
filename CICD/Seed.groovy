@@ -9,6 +9,7 @@ node{
 				id('12314')
 				remote(repo_url)
 			}
+			scriptPath('CICD/Jenkinsfile')
 			//github is a valid option too
 		}
 		orphanedItemStrategy{
