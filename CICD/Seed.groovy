@@ -1,4 +1,3 @@
-
 node{
 	jobDsl scriptText: """
 	def repo_url = 'https://github.com/other019/mrchecker-source.git'
@@ -9,12 +8,15 @@ node{
 				id('12314')
 				remote(repo_url)
 			}
-			scriptPath('CICD/Jenkinsfile')
-			//github is a valid option too
 		}
 		orphanedItemStrategy{
 			discardOldItems{
 				daysToKeep(30)
+			}
+		}
+		factory{
+			workflowBranchProjectFactory {
+				scriptPath('CICD/Jenkinsfile')
 			}
 		}
 		triggers{
