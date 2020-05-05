@@ -1,3 +1,12 @@
-node(){
-	echo "its working"
+pipeline{
+	agent none
+	stages{
+		stage('Build'){
+			agent {docker 'lucst/devonfwe2e:v2-0.4'}
+			steps{
+				sh 'mvn -v'
+				sh 'mvn -q install -DskipTests=true'
+			}
+		}
+	}
 }
