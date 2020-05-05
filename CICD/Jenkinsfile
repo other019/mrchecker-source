@@ -1,1 +1,3 @@
-exemplary jenkinsfile
+node(){
+	echo "its working"
+}
