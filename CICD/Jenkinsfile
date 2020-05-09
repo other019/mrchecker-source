@@ -1,5 +1,5 @@
 pipeline{
-	agent {docker image{'marzepka/mrchecker:v1.0.2'}}
+	agent {docker {image 'marzepka/mrchecker:v1.0.2'}}
 	stages{
 		stage('Build'){
 			steps{
