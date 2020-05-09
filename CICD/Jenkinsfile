@@ -2,7 +2,7 @@ pipeline{
 	agent none
 	stages{
 		stage('Build'){
-			agent {docker 'lucst/devonfwe2e:v2-0.4'}
+			agent {docker 'marzepka/mrchecker:v1.0.2'}
 			steps{
 				sh 'mvn -v'
 				sh 'mvn -q install -DskipTests=true'
