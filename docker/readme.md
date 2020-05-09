@@ -1,0 +1,2 @@
+# Docker image
+This docker image is ment to be environment designed ot have unified build environment for this project. It's based on ubuntu 20.04 LTS Focal Fossa, and its featuring sdkman which installs java 8.0.252-open, which is OpenJDK release of Java. It installs also maven 3.6.3
