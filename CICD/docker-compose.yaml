@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  jenkins:
+    image: jenkins/jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - ./Seed:/var/jenkins_home/workspace/Seed #used to have Seed job right from the start
+      - ./plugins.txt:/plugins.txt #used to have the plugins preinstalled
+      - /var/run/docker.sock:/var/run/docker.sock
+#install-plugins.sh for managing needed plugins
+# /usr/local/bin/install-plugins.sh
+# /plugins.txt
