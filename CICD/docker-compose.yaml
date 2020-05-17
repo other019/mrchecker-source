@@ -1,14 +1,35 @@
 version: "3.3"
 services:
   jenkins:
-    image: jenkins/jenkins
+    image: marzepka/mrchecker-jenkins:v1.0.0
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - ./Seed:/var/jenkins_home/workspace/Seed #used to have Seed job right from the start
-      - ./plugins.txt:/plugins.txt #used to have the plugins preinstalled
       - /var/run/docker.sock:/var/run/docker.sock
-#install-plugins.sh for managing needed plugins
-# /usr/local/bin/install-plugins.sh
-# /plugins.txt
+  reverse-proxy:
+    #build: 'reverse-proxy/'
+    restart: always
+    #container_name: 'mts_reverse_proxy'
+    image: docker.pkg.github.com/devonfw/my-thai-star/reverse-proxy   #docker pull docker.pkg.github.com/devonfw/my-thai-star/reverse-proxy:latest
+    networks:
+      - my-thai-star
+    ports:
+      - '8081:80'
+  angular:
+    #build: 'angular/'
+    restart: always
+    #container_name: 'mts_angular'
+    image: docker.pkg.github.com/devonfw/my-thai-star/angular:latest #docker pull docker.pkg.github.com/devonfw/my-thai-star/angular:latest
+    networks:
+      - my-thai-star
+  java:
+    #build: 'java/'
+    restart: always
+    #container_name: 'mts_java'
+    image: docker.pkg.github.com/devonfw/my-thai-star/java:latest #docker pull docker.pkg.github.com/devonfw/my-thai-star/java:latest
+    networks:
+      - my-thai-star
+networks:
+  my-thai-star:
+    driver: bridge
