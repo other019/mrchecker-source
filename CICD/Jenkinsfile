@@ -1,11 +1,28 @@
+env.workspace = 'mrchecker-framework-modules'
 pipeline{
-	agent {docker {image 'marzepka/mrchecker:v1.0.2'}}
+	agent {docker {image 'marzepka/mrchecker:v1.1.2'}}
 	stages{
 		stage('Build'){
 			steps{
-				sh 'mvn -v'
-				sh 'mvn -q install -DskipTests=true'
+
+				sh """
+				env
+				mvn clean compile package -DskipTests=true
+				"""
+			}
+		}
+		stage('Test'){
+			steps{
+				sh """
+				mvn test
+				"""
 			}
 		}
 	}
+	// post{
+	// 	always{
+	//		archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+	// 		junit 'build/reports/**/*.xml'
+	// 	}
+	// }
 }
