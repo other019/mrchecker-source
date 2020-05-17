@@ -1,8 +1,13 @@
-FROM ubuntu:focal
-RUN apt update && apt install -y \
-	git\
-	curl\
-	unzip\
-	zip
-RUN curl -s "https://get.sdkman.io" | bash && chmod a+x "$HOME/.sdkman/bin/sdkman-init.sh"
-RUN ["/bin/bash","-c", "source \"$HOME/.sdkman/bin/sdkman-init.sh\" && sdk install java 8.0.252-open && sdk install maven 3.6.3"]
+FROM maven:3.6.3-jdk-8
+
+# Jenkins runs with user `jenkins`, uid = 1000
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+RUN addgroup --gid ${gid} ${group} && adduser --disabled-password  --uid ${uid} --gid ${gid} ${user}
+
+ARG workspace=/workspace
+RUN mkdir -p -m 777 ${workspace}
+WORKDIR ${workspace}
+USER ${user}
