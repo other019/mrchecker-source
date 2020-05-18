@@ -281,6 +281,7 @@
                             <exclude>**/RawTest.*</exclude>
                             <exclude>**/OutboxDocumentTest.*</exclude>
                         </excludes>
+                        <argLine>@{argLine}</argLine>
                     </configuration>
                 </plugin>
 
@@ -298,9 +299,32 @@
                     <version>${maven-project-info-reports-plugin.version}</version>
                 </plugin>
                 <plugin>
+                  <!-- https://dzone.com/articles/reporting-code-coverage-using-maven-and-jacoco-plu -->
                   <groupId>org.jacoco</groupId>
                   <artifactId>jacoco-maven-plugin</artifactId>
                   <version>0.8.5</version>
+                  <executions>
+                    <execution>
+                      <id>coverage-initialize</id>
+                      <goals>
+                        <goal>prepare-agent</goal>
+                      </goals>
+                    </execution>
+                    <execution>
+                      <id>coverage-report</id>
+                      <!-- <phase>post-integration-test</phase> -->
+                      <phase>post-test</phase>
+                      <goals>
+                        <goal>report</goal>
+                      </goals>
+                    </execution>
+                    <execution>
+                      <id>coverage-check</id>
+                      <goals>
+                        <goal>check</goal>
+                      </goals>
+                    </execution>
+                  </executions>
                 </plugin>
 
             </plugins>
