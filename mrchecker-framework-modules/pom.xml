@@ -92,6 +92,7 @@
         <joda-time.version>2.9.9</joda-time.version>
         <commons-csv.version>1.1</commons-csv.version>
         <JUnitParams.version>1.0.4</JUnitParams.version>
+        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 
         <!-- Dependency Injection -->
         <guice.version>4.1.0</guice.version>
@@ -281,7 +282,7 @@
                             <exclude>**/RawTest.*</exclude>
                             <exclude>**/OutboxDocumentTest.*</exclude>
                         </excludes>
-                        <argLine>@{argLine}</argLine>
+                        <!-- <argLine>@{argLine}</argLine> -->
                     </configuration>
                 </plugin>
 
@@ -299,33 +300,30 @@
                     <version>${maven-project-info-reports-plugin.version}</version>
                 </plugin>
                 <plugin>
-                  <!-- https://dzone.com/articles/reporting-code-coverage-using-maven-and-jacoco-plu -->
-                  <groupId>org.jacoco</groupId>
-                  <artifactId>jacoco-maven-plugin</artifactId>
-                  <version>0.8.5</version>
-                  <executions>
-                    <execution>
-                      <id>coverage-initialize</id>
-                      <goals>
-                        <goal>prepare-agent</goal>
-                      </goals>
-                    </execution>
-                    <execution>
-                      <id>coverage-report</id>
-                      <!-- <phase>post-integration-test</phase> -->
-                      <phase>post-test</phase>
-                      <goals>
-                        <goal>report</goal>
-                      </goals>
-                    </execution>
-                    <execution>
-                      <id>coverage-check</id>
-                      <goals>
-                        <goal>check</goal>
-                      </goals>
-                    </execution>
-                  </executions>
-                </plugin>
+                   <groupId>org.jacoco</groupId>
+                   <artifactId>jacoco-maven-plugin</artifactId>
+                   <version>${jacoco-maven-plugin.version}</version>
+                   <executions>
+                       <execution>
+                           <id>prepare-tests</id>
+                           <goals>
+                               <goal>prepare-agent</goal>
+                           </goals>
+                           <configuration>
+                               <destFile>${project.build.directory}/jacoco.exec</destFile>
+                               <propertyName>surefireArgLine</propertyName>
+                           </configuration>
+                       </execution>
+                       <execution>
+                           <id>coverage-report</id>
+                           <phase>post-integration-test</phase>
+                           <goals>
+                               <goal>report</goal>
+                           </goals>
+                       </execution>
+                   </executions>
+               </plugin>
+
 
             </plugins>
 
