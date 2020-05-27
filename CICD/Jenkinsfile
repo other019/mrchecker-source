@@ -27,6 +27,7 @@ pipeline{
 		always{
 			archiveArtifacts artifacts: "${env.workspace}/${env.module}/target/*.jar", fingerprint: true
 			junit '**/surefire-reports/*.xml'
+			jacoco()
 		}
 	}
 }
