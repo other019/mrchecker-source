@@ -1,5 +1,6 @@
 env.module = "${JOB_NAME}".split('/')[0]
 env.workspace = "mrchecker-framework-modules"
+def hideTransfer = "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
 pipeline{
 	agent {docker {image 'marzepka/mrchecker:v1.1.2'}}
 	stages{
@@ -8,7 +9,7 @@ pipeline{
 				echo "Building module ${env.module} and it's dependency"
 				sh """
 				cd ${env.workspace}
-				mvn clean compile package install -DskipTests=true --projects ${env.module} --also-make
+				mvn clean compile package install -DskipTests=true --projects ${env.module} --also-make ${hideTransfer}
 				"""
 				//bulid this module and its dependencies deploy them to local repo
 			}
@@ -18,7 +19,7 @@ pipeline{
 				echo "Testing ${env.module}"
 				sh """
 				cd ${env.workspace}
-				mvn test --projects ${env.module}
+				mvn test --projects ${env.module} ${hideTransfer}
 				"""
 			}
 		}
