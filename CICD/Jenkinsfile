@@ -18,7 +18,7 @@ pipeline{
 				echo "Testing ${env.module}"
 				sh """
 				cd ${env.workspace}
-				mvn test --projects ${env.module} 
+				mvn jacoco:prepare-agent test --projects ${env.module} 
 				"""
 			}
 		}
