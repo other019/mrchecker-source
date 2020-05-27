@@ -305,14 +305,15 @@
                    <version>${jacoco-maven-plugin.version}</version>
                    <executions>
                        <execution>
-                           <id>prepare-tests</id>
+             		   <id>prepare-tests</id>
+		           <phase>process-test-classes</phase> 
                            <goals>
                                <goal>prepare-agent</goal>
                            </goals>
-			   <!--<configuration>
+			   <configuration>
                                <destFile>${project.build.directory}/jacoco.exec</destFile>
                                <propertyName>surefireArgLine</propertyName>
-			   </configuration>-->
+			   </configuration>
                        </execution>
                        <execution>
                            <id>coverage-report</id>
