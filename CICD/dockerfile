@@ -14,7 +14,7 @@ RUN apt-get update \
     $(lsb_release -cs) stable" \
     && apt-get update \
     && apt-get install -y docker-ce docker-ce-cli containerd.io \
-    && usermod -aG docker jenkins
+RUN usermod -a -G docker jenkins && chown /var/run/docker.sock docker:docker
 
 #RUN  chown -R jenkins:jenkins $JENKINS_HOME/
 

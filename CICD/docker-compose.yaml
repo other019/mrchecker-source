@@ -1,12 +1,15 @@
 version: "3.3"
 services:
   jenkins:
-    image: marzepka/mrchecker-jenkins:v1.0.0
+    image: marzepka/mrchecker-jenkins:v1.1.2
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    build:
+      context: .
+      dockerfile: dockerfile
   reverse-proxy:
     #build: 'reverse-proxy/'
     restart: always
