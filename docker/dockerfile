@@ -1,5 +1,6 @@
 FROM maven:3.6.3-jdk-8
 
+
 # Jenkins runs with user `jenkins`, uid = 1000
 ARG user=jenkins
 ARG group=jenkins
@@ -10,4 +11,11 @@ RUN addgroup --gid ${gid} ${group} && adduser --disabled-password  --uid ${uid} 
 ARG workspace=/workspace
 RUN mkdir -p -m 777 ${workspace}
 WORKDIR ${workspace}
+USER root
+#for mrchecker-selenium-module
+RUN apt-get update \
+    && apt-get install -y xvfb libxi6 libgconf-2-4
+
+#for mrchecker-mobile-module
+
 USER ${user}
