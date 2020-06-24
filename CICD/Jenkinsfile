@@ -30,10 +30,13 @@ pipeline{
 			junit '**/surefire-reports/*.xml', healthScaleFactor: 0.8 //as I set the junit treshold to 80%
 		}
         success{
-            def downstreamJob = "${JOB_NAME}".split('/')
-            downstreamJob[0] = 'test'
-            downstreamJob.join('/')
-            build job: downstreamJob, propagate: false, wait: false
+            script{
+                def downstreamJob = "${JOB_NAME}".split('/')
+                downstreamJob[0] = 'test'
+                downstreamJob.join('/')
+
+                build job: downstreamJob, propagate: false, wait: false
+            }
         }
 	}
 }
