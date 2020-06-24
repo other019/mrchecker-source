@@ -26,8 +26,15 @@ pipeline{
 	post{
 		always{
 			archiveArtifacts artifacts: "${env.workspace}/${env.module}/target/*.jar", fingerprint: true
-			junit '**/surefire-reports/*.xml'
 			jacoco()
+			junit '**/surefire-reports/*.xml', healthScaleFactor: 0.8 //as I set the junit treshold to 80%
 		}
+        success{
+            def downstreamJob = "${JOB_NAME}".split('/')
+            downstreamJob[0] = 'test'
+            downstreamJob.join('/')
+            build job: downstreamJob, propagate: false, wait: false
+        }
 	}
 }
+
