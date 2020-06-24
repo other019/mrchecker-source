@@ -33,8 +33,7 @@ pipeline{
             script{
                 def downstreamJob = "${JOB_NAME}".split('/')
                 downstreamJob[0] = 'test'
-                downstreamJob.join('/')
-
+                downstreamJob = downstreamJob.join('/')
                 build job: downstreamJob, propagate: false, wait: false
             }
         }
