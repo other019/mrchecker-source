@@ -10,7 +10,7 @@ def configs = []
 def folders = ['build','test','deploy']
 modules.each{
     configs << new Config(jenkinsFolder:'build', scriptPath:'CICD/Jenkinsfile', repoUrl: repoUrl, module:it)
-    configs << new Config(jenkinsFolder:'test' , scriptPath:'mrchecker-framework-modules/${module}/Jenkinsfile', repoUrl: repoUrl, module:it)
+    configs << new Config(jenkinsFolder:'test' , scriptPath:'mrchecker-framework-modules/${it}/Jenkinsfile', repoUrl: repoUrl, module:it)
     configs << new Config(jenkinsFolder:'deploy', scriptPath:'CICD/Deploy_Jenkinsfile', repoUrl: repoUrl, module:it)
 }
 def script = makeJobs(configs,folders)
