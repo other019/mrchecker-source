@@ -1,4 +1,4 @@
-env.module = "${JOB_NAME}".split('/')[0]
+env.module = "${JOB_NAME}".split('/')[1]
 env.workspace = "mrchecker-framework-modules"
 pipeline{
 	agent {docker {image 'marzepka/mrchecker:v1.1.3'}}
