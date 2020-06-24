@@ -27,7 +27,7 @@ pipeline{
 		always{
 			archiveArtifacts artifacts: "${env.workspace}/${env.module}/target/*.jar", fingerprint: true
 			jacoco()
-			junit '**/surefire-reports/*.xml', healthScaleFactor: 0.8 //as I set the junit treshold to 80%
+			junit testResults:'**/surefire-reports/*.xml', healthScaleFactor: 0.8 //as I set the junit treshold to 80%
 		}
         success{
             script{
