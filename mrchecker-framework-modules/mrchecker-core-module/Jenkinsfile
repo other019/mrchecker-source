@@ -2,7 +2,9 @@ pipeline{
     agent {docker {image 'marzepka/mrchecker:v1.1.3'}}
     stages{
         stage('Dummy'){
-            echo "dummy step"
+            steps{
+                echo "dummy step"
+            }
         }
     }
 }
