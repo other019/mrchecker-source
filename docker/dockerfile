@@ -14,8 +14,11 @@ WORKDIR ${workspace}
 USER root
 #for mrchecker-selenium-module
 RUN apt-get update \
-    && apt-get install -y xvfb libxi6 libgconf-2-4
-
+    && apt-get install -y xvfb libxi6 # libgconf-2-4 libnss3
+#RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
+#https://github.com/puppeteer/puppeteer/issues/2857
+#serarching for fix on sandboxing problems
 #for mrchecker-mobile-module
 
 USER ${user}
